@@ -21,6 +21,7 @@
                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>Cpf</th>
                                     <th>Processo</th>
                                     <th>Nome Contribuinte</th>
                                     <th>Endereço Visita</th>
@@ -32,6 +33,7 @@
                             <tbody>
                                 @foreach ($dados as $dado)
                                     <tr>
+                                        <td>{{$dado->cpf}}</td>
                                         <td>{{$dado->processo}}</td>
                                         <td>{{$dado->nome_contribuinte}}</td>
                                         <td>{{$dado->endereco_visita}}</td>
@@ -48,4 +50,5 @@
         </div>
     </div>
 </div>
+{{-- @include('layouts.footer') --}}
 @endsection
