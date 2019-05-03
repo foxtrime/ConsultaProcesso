@@ -28,4 +28,19 @@ class DadosController extends Controller
         return response()->json($processo);
     }
 
+    public function confirmarProcesso(Request $request , $numeroProcesso)
+    {
+        $processo = DB::table('dados')->where('processo', '=', $numeroProcesso)->first();
+        $processo->status = 'Validado';
+        
+        $teste = Dados::find($processo->id);
+        $teste->status = 'Validado';
+        $teste->save();
+        
+        dd($teste);
+
+        return response()->json($teste);
+        
+    }
+
 }

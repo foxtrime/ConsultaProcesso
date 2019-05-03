@@ -24,9 +24,13 @@
                     <div id="datas" class='rounded'></div>
                     <div id="horas" class='rounded'></div>
                     <div id="statu" class='rounded'></div>
+                    <button class="btn btn-success" onclick="enviar()" id="enviar" style="display:none">Confirmar Visita</button>
                 </center>
             </div>
         </div>
+        <form hidden>
+            <input type="text" id="numeroProcesso" name="numeroProcesso" >
+        </form>
     </div>
 </div>
 
@@ -69,6 +73,7 @@
                         $('#datas').hide();
                         $('#horas').hide();
                         $('#statu').hide();
+                        $('#enviar').hide();
                         //Mostra mensagem
                         $("#resp").html("<h3>Nenhum dado encontrado</h3>");
                     }else{
@@ -80,6 +85,7 @@
                         $('#datas').show();
                         $('#horas').show();
                         $('#statu').show();
+                        $('#enviar').show();
                         //Cria os dados
                         $('#processos').html("Processo: "+dados[0]['processo']);
                         $('#cpf').html("Cpf: "+dados[0]['cpf']);
@@ -88,14 +94,29 @@
                         $('#datas').html("Data da Vistoria: "+dados[0]['data']);
                         $('#horas').html("Hora da Vistoria: "+dados[0]['hora']);
                         $('#statu').html("Status do Contribuinte: "+dados[0]['status']);
-
-
                     }
-                }
-            })
 
+
+                }
+                        
+            })
         })
     });
+
+    function enviar(){
+        let numeroProcesso = document.getElementById("processo").value;
+
+        var query = "http://consultaprocesso.test/validaprocesso/"+numeroProcesso;
+        
+
+         $.ajax({
+             url: query,
+             success: function(data){
+             
+             }
+         })
+
+    }
 
 </script>
 @include('layouts.footer')

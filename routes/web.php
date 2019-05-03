@@ -24,5 +24,6 @@ Route::get('/', 'DadosController@index')->name('index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('pesquisaprocesso/{numeroProcesso}', 'DadosController@consultaProcesso');
+Route::get('validaprocesso/{numeroProcesso}', 'DadosController@confirmarProcesso');
 
 Route::resource('/home', 'HomeController');
