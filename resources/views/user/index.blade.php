@@ -14,17 +14,17 @@
                     <button class='btn btn-success' id="procurar">Buscar</button>
                 </div>
             </div>
-            <div>
+            <div style="padding-top: 43px;">
+                <table align="center" class="table">
+                    <tr style="text-align:center" id="cpf"></tr>
+                    <tr style="text-align:center" id="nome_contribuintes"></tr>
+                    <tr style="text-align:center" id="endereco_visitas"></tr>
+                    <tr style="text-align:center" id="datas"></tr>
+                    <tr style="text-align:center" id="horas"></tr>
+                    <tr style="text-align:center" id="statu"></tr>
+                </table> 
                 <center>
-                    <div id="resp" class='alert'></div>
-                    {{-- <div id="processos" class='rounded'></div> --}}
-                    <div id="cpf" class='rounded'></div>
-                    <div id="nome_contribuintes" class='rounded'></div>
-                    <div id="endereco_visitas" class='rounded'></div>        
-                    <div id="datas" class='rounded'></div>
-                    <div id="horas" class='rounded'></div>
-                    <div id="statu" class='rounded'></div>
-                    <button class="btn btn-success" onclick="enviar()" id="enviar" style="display:none">Confirmar Visita</button>
+                    <button class="btn btn-success" onclick="enviar()" id="enviar" style="display:none">Confirmar Visita</button> 
                 </center>
             </div>
         </div>
@@ -69,7 +69,7 @@
                         $('#processos').hide();
                         $('#cpf').hide();
                         $('#nome_contribuintes').hide();
-                        $('#endereco_visistas').hide();
+                        $('#endereco_visitas').hide();
                         $('#datas').hide();
                         $('#horas').hide();
                         $('#statu').hide();
@@ -81,16 +81,19 @@
                         $('#processos').show();
                         $('#cpf').show();
                         $('#nome_contribuintes').show();
-                        $('#endereco_visistas').show();
+                        $('#endereco_visitas').show();
                         $('#datas').show();
                         $('#horas').show();
                         $('#statu').show();
                         $('#enviar').show();
+                        if(dados[0]['status']=='Validado'){
+                            $('#enviar').hide();
+                        }
                         //Cria os dados
                         $('#processos').html("Processo: "+dados[0]['processo']);
                         $('#cpf').html("Cpf: "+dados[0]['cpf']);
                         $('#nome_contribuintes').html("Nome do Contribuinte: "+dados[0]['nome_contribuinte']);
-                        $('#endereco_visistas').html("Endereço da Vistoria: "+dados[0]['endereco_visita']);
+                        $('#endereco_visitas').html("Endereço da Vistoria: "+dados[0]['endereco_visita']);
                         $('#datas').html("Data da Vistoria: "+dados[0]['data']);
                         $('#horas').html("Hora da Vistoria: "+dados[0]['hora']);
                         $('#statu').html("Status do Contribuinte: "+dados[0]['status']);
@@ -107,12 +110,12 @@
         let numeroProcesso = document.getElementById("processo").value;
 
         var query = "http://consultaprocesso.test/validaprocesso/"+numeroProcesso;
-        
-
+    
          $.ajax({
              url: query,
              success: function(data){
-             
+                $('#statu').html('Validado');
+                $('#enviar').hide();
              }
          })
 
