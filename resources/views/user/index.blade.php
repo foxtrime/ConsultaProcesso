@@ -96,7 +96,7 @@
                         $('#nome_contribuintes').html("Nome do Contribuinte: "+dados[0]['nome_contribuinte']);
                         $('#endereco_visitas').html("Endereço da Vistoria: "+dados[0]['endereco_visita']);
                         $('#datas').html("Data da Vistoria: "+dados[0]['data']);
-                        $('#horas').html("Hora da Vistoria: "+dados[0]['hora']);
+                        $('#horas').html("Período da Vistoria : "+dados[0]['hora']);
                         $('#statu').html("Status do Contribuinte: "+dados[0]['status']);
                     }
 

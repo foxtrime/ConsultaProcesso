@@ -44,7 +44,10 @@
 
                         <div class="form-group">
                             <label for="nome_contribuinte">Hora da Vistoria</label>
-                            <input name="hora" type="time" class="form-control" required>
+                            <select name="hora" class="form-control" name="select">
+                                <option value="Manhã - 09:00 as 12:00 Horas">Manhã - 09:00 as 12:00 Horas</option> 
+                                <option value="Tarde - 12:00 as 17:00 Horas">Tarde - 12:00 as 17:00 Horas</option>
+                            </select>
                         </div>
 
                         <div class="row col-md-12 col-sm-12">
