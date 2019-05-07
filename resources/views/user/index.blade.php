@@ -8,12 +8,10 @@
                 <center><label>Consulte</label>
                 <input type="text" class="form-control" name="processo" id="processo" style="width: 40%;" required></center>
             </div>
-            
-            <div class="row">
-                <div style="padding-left: 47%;">
+                <div class="d-flex justify-content-center">
                     <button class='btn btn-success' id="procurar">Buscar</button>
-                </div>
-            </div>
+                </div>        
+            
             <div style="padding-top: 43px;">
                 <table align="center" class="table">
                     <tr style="text-align:center" id="cpf"></tr>
@@ -22,10 +20,13 @@
                     <tr style="text-align:center" id="datas"></tr>
                     <tr style="text-align:center" id="horas"></tr>
                     <tr style="text-align:center" id="statu"></tr>
-                </table> 
-                <center>
-                    <button class="btn btn-success" onclick="enviar()" id="enviar" style="display:none">Confirmar Visita</button> 
-                </center>
+                </table>
+                    <center>
+                        <div id="resp"></div>
+                    </center> 
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" onclick="enviar()" id="enviar" style="display:none">Confirmar Visita</button> 
+                    </div>                    
             </div>
         </div>
         <form hidden>
