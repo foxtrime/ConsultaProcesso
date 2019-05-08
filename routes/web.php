@@ -26,4 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('pesquisaprocesso/{numeroProcesso}', 'DadosController@consultaProcesso');
 Route::get('validaprocesso/{numeroProcesso}', 'DadosController@confirmarProcesso');
 
+
+Route::post('/statusatt/{data}', 'HomeController@editstatus');
+
 Route::resource('/home', 'HomeController');

@@ -32,7 +32,9 @@
                                     <th>Endereço Visita</th>
                                     <th>Data Visita</th>
                                     <th>Hora Visita</th>
-                                    <th>Status</th>                        
+                                    <th>Status Contribuinte</th>
+                                    <th>Status da Fiscalização</th>
+                                    <th>Açoes</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,12 +45,26 @@
                                         <td>{{$dado->nome_contribuinte}}</td>
                                         <td>{{$dado->endereco_visita}}</td>
                                         <td>{{$dado->data}}</td>
-                                        <td>{{$dado->hora}}</td>
+                                        <td>{{ mb_strimwidth($dado->hora, 0, 8,"...")}}</td>
                                         <td>{{$dado->status}}</td>
+                                        <td>{{$dado->statusinterno}}</td>
+                                        <td><a href="#"
+                                            data-id="{{$dado->id}}" 
+                                            data-processo="{{$dado->processo}}"
+                                            id="btn_andamento_viagem" 
+                                            class="btn btn-danger glyphicon glyphicon-search" 
+                                            data-toggle="tooltip" 
+                                            data-viagem="15" 
+                                            data-placement="bottom" 
+                                            title="Mudar Status da fiscalização" 
+                                            data-desabilitado="false" 
+                                            > 
+                                            <i class="fas fa-thumbs-up"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                        
                         </table>
                     </div>
                 </div>
@@ -78,7 +94,53 @@
     <script src="{{ asset('vendors/jszip/dist/jszip.min.js')}}"></script>
     <script src="{{ asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
     <script src="{{ asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+    
+    {{-- Sweet Alert --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
+    <script>
+        $(function(){
+            $("body").on("click", ".btn-danger", function(e){
+            // Evitar que a página recarregue
+            e.preventDefault();
+            // Obter Processo do usuario
+            let processo = $(this).data('processo');
+            let id = $(this).data('id');
+            
+            // Configuração do Sweet alert
+                Swal.fire({
+                    title: 'Selecione o Status da Fiscalização',
+                    text: "Você realmente deseja alterar o status do processo "+processo+" ?",
+                    input: 'select',
+                    inputOptions: {
+                        'Não Autorizado e Possivel Estimar': 'Não Autorizado e Possivel Estimar',
+                        'Não Autorizado e Impossivel Estimar': 'Não Autorizado e Impossivel Estimar',
+                        'Não Localizado': 'Não Localizado',
+                        'Não Atendido': 'Não Atendido',
+                        'Não Atendido e Possivel Estimar': 'Não Atendido e Possivel Estimar',
+                        'Não Atendido e Impossivel Estimar': 'Não Atendido e Impossivel Estimar',
+                        'Área de Risco': 'Área de Risco',
+                        'Lote Vazio': 'Lote Vazio'
+                    },
+                    inputPlaceholder: 'Selecione o Status',
+                    showCancelButton: true,
+                }).then(function(data){
+                    console.log(data);
+                    $.post(" {{ url("/statusatt/") }}/"+data['value'],{
+                    _token: 	'{{ csrf_token() }}',
+   	 	 		    id: 		id,
+   	 	 		    statusinterno: data
+   	 	 	        }).done(function(){
+
+//Recarregar a página
+location.reload();
+});
+                });
+            });   
+        });
+    
+    </script>
 
     <script>
   
@@ -93,5 +155,4 @@
       });
 
     </script>
-
 @endpush

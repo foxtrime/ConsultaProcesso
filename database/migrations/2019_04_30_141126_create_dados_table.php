@@ -22,6 +22,15 @@ class CreateDadosTable extends Migration
             $table->date('data');
             $table->enum('hora',['Manhã - 09:00 as 12:00 Horas','Tarde - 12:00 as 17:00 Horas']);
             $table->enum('status',['Não Validado','Validado']);
+            $table->enum('statusinterno',['Não Autorizado e Possivel Estimar',
+                                          'Não Autorizado e Impossivel Estimar',
+                                          'Não Localizado',
+                                          'Não Atendido',
+                                          'Não Atendido e Possivel Estimar',
+                                          'Não Atendido e Impossivel Estimar',
+                                          'Área de Risco',
+                                          'Lote Vazio'
+                        ])->nullable();
             $table->timestamps();
         });
     }

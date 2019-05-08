@@ -40,4 +40,12 @@ class HomeController extends Controller
         return redirect(url('/home'))->with('success','Informação cadastrada com sucesso!');
     }
 
+    public function editstatus(Request $request, $data)
+    {
+        $dados = Dados::find($request->id);
+        $dados->statusinterno = $data;
+        $dados->save();
+        dd($dados);
+    }
+
 }

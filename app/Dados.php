@@ -15,5 +15,6 @@ class Dados extends Model
     	'data',
         'hora',
         'status',
+        'statusinterno',
     ];
 }
