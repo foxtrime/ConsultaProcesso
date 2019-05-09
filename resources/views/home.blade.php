@@ -121,7 +121,8 @@
                         'Não Atendido e Possivel Estimar': 'Não Atendido e Possivel Estimar',
                         'Não Atendido e Impossivel Estimar': 'Não Atendido e Impossivel Estimar',
                         'Área de Risco': 'Área de Risco',
-                        'Lote Vazio': 'Lote Vazio'
+                        'Lote Vazio': 'Lote Vazio',
+                        'Realizada': 'Realizada'
                     },
                     inputPlaceholder: 'Selecione o Status',
                     showCancelButton: true,
