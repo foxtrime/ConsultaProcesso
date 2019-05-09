@@ -29,7 +29,8 @@ class CreateDadosTable extends Migration
                                           'Não Atendido e Possivel Estimar',
                                           'Não Atendido e Impossivel Estimar',
                                           'Área de Risco',
-                                          'Lote Vazio'
+                                          'Lote Vazio',
+                                          'Realizada'
                         ])->nullable();
             $table->timestamps();
         });
