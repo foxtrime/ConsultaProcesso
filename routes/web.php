@@ -15,7 +15,12 @@
 //     return view('welcome');
 // });
 
-Auth::routes();
+// Auth::routes();
+
+
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/entrar', 'AuthController@entrar');
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 

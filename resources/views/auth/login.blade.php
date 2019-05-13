@@ -59,7 +59,7 @@
 				{{--  login  --}}
 				<div class="animate form login_form">
 					<section class="login_content">
-                     <form action="{{ url('login')}}" method="POST">
+                     <form action="{{ url('/entrar')}}" method="POST">
                         {!! csrf_field() !!}
 							
 							<h1 class="cor_texto_roxo">Sistema de Gestão de Processos</h1>
