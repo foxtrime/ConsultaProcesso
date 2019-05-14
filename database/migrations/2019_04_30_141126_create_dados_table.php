@@ -15,11 +15,11 @@ class CreateDadosTable extends Migration
     {
         Schema::create('dados', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('cpf',11);
+            $table->char('cpf',14);
             $table->char('processo',11);
             $table->string('nome_contribuinte');
             $table->string('endereco_visita');
-            $table->date('data');
+            $table->char('data');
             $table->enum('hora',['Manhã - 09:00 as 12:00 Horas','Tarde - 12:00 as 17:00 Horas']);
             $table->enum('status',['Não Validado','Validado']);
             $table->enum('statusinterno',['Não Autorizado e Possivel Estimar',

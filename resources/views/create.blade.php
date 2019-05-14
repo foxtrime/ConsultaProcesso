@@ -38,8 +38,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="nome_contribuinte">Data da Vistoria</label>
-                            <input id="data" name="data" type="date" class="form-control" value="" required>
+                            <label for="data">Data da Vistoria</label>
+                            <input id="data" name="data" type="text" class="form-control" required>
                         </div>
 
                         <div class="form-group">
@@ -73,6 +73,12 @@
 </div>
 @include('layouts.footer');
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script type="text/javascript">
+    $("#data").mask("00/00/0000");
+    $("#cpf").mask("000.000.000-00");
+ </script>
     <script>
         function goBack() {
           window.history.back();
