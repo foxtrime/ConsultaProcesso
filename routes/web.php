@@ -35,3 +35,7 @@ Route::get('validaprocesso/{numeroProcesso}', 'DadosController@confirmarProcesso
 Route::post('/statusatt/{data}', 'HomeController@editstatus');
 
 Route::resource('/home', 'HomeController');
+
+//caminho para a tela de alteração de senha
+Route::get 	('/alterasenha',			'FuncionarioController@AlteraSenha');
+Route::post	('/salvasenha',   		'FuncionarioController@SalvarSenha');
