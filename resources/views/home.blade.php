@@ -94,6 +94,8 @@
     <script src="{{ asset('vendors/jszip/dist/jszip.min.js')}}"></script>
     <script src="{{ asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
     <script src="{{ asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/date-uk.js"></script>
+   
     
     {{-- Sweet Alert --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -144,10 +146,17 @@ location.reload();
     </script>
 
     <script>
+
   
       $(function($){
 
         $('#datatable').DataTable({
+          columnDefs: [
+            {
+                type: 'date-uk',
+                targets: 4
+            }
+          ],
           "language": {
               "url": "js/portugues.json"
           }

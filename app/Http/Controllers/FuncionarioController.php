@@ -44,7 +44,7 @@ class FuncionarioController extends Controller
 
            $funcionario->update(['password' => ($request->password)]);
 
-            return redirect('/')->with('sucesso_alteracao_senha','Senha alterada com sucesso.');
+            return redirect('/home')->with('sucesso_alteracao_senha','Senha alterada com sucesso.');
         }else{
             return back()->withErrors('Senha atual não confere');
         }
