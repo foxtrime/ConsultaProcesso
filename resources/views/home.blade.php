@@ -1,11 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <div class="justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="">
+   <div class="justify-content-center">
+      <div class="col-md-12">
+         <div class="card">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+               <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Lista de Agendamentos</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Agendamentos Arquivados</a>
+               </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="">
                     <h3 style="margin-left: 1%; margin-top: 2%;"> Lista de Agendamentos {{-- <small>Some examples to get you started</small> --}}</h3>
                     <a class="btn btn-success" style="margin-left: 90%; background:#3e276a; border-color: #32276a;" href="{{ url ('home/create')}}">Adicionar</a>
                 </div>
@@ -69,10 +81,70 @@
                     </div>
                 </div>
             </div>
+
+               </div>
+
+               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                  <div class="">
+                    <h3 style="margin-left: 1%; margin-top: 2%;"> Lista de Agendamentos Arquivados {{-- <small>Some examples to get you started</small> --}}</h3>
+                </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                 <br>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                    <div class="x_content">
+                        <table id="datatable2" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>CPF</th>
+                                    <th>Processo</th>
+                                    <th>Nome Contribuinte</th>
+                                    <th>Endereço Visita</th>
+                                    <th>Data Visita</th>
+                                    <th>Hora Visita</th>
+                                    <th>Status Contribuinte</th>
+                                    <th>Status da Fiscalização</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dadosarq as $dado)
+                                    <tr>
+                                        <td>{{$dado->cpf}}</td>
+                                        <td>{{$dado->processo}}</td>
+                                        <td>{{$dado->nome_contribuinte}}</td>
+                                        <td>{{$dado->endereco_visita}}</td>
+                                        <td>{{$dado->data}}</td>
+                                        <td>{{ mb_strimwidth($dado->hora, 0, 8,"...")}}</td>
+                                        <td>{{$dado->status}}</td>
+                                        <td>{{$dado->statusinterno}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+
+
+               </div>
+
+
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
+
 @include('layouts.footer')
 
 @endsection
@@ -136,9 +208,9 @@
    	 	 		    statusinterno: data
    	 	 	        }).done(function(){
 
-//Recarregar a página
-location.reload();
-});
+                    //Recarregar a página
+                    location.reload();
+                    });
                 });
             });   
         });
@@ -146,6 +218,10 @@ location.reload();
     </script>
 
     <script>
+
+        $('#menu li').click(function(){
+            $('#conteudo').load( this.data("target") );
+        })
 
   
       $(function($){
@@ -164,5 +240,22 @@ location.reload();
 
       });
 
+      $(function($){
+
+        $('#datatable2').DataTable({
+          columnDefs: [
+            {
+                type: 'date-uk',
+                targets: 4
+            }
+          ],
+          "language": {
+              "url": "js/portugues.json"
+          }
+        });
+
+      });
+
     </script>
+
 @endpush

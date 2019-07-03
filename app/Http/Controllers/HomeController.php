@@ -24,8 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dados = Dados::all();
-        return view('home',compact('dados'));
+        $dados = Dados::where('arquivado','=',0)->get();
+
+        $dadosarq = Dados::where('arquivado','=',1)->get();
+
+        return view('home',compact('dados','dadosarq'));
     }
 
     public function create()
@@ -44,6 +47,7 @@ class HomeController extends Controller
     {
         $dados = Dados::find($request->id);
         $dados->statusinterno = $data;
+        $dados->arquivado = 1;
         $dados->save();
         dd($dados);
     }

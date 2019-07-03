@@ -16,5 +16,6 @@ class Dados extends Model
         'hora',
         'status',
         'statusinterno',
+        'arquivado',
     ];
 }
