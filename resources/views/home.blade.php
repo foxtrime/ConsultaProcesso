@@ -69,7 +69,7 @@
                                             data-id="{{$dado->id}}" 
                                             data-processo="{{$dado->processo}}"
                                             id="btn_andamento_viagem" 
-                                            class="btn btn-success btn-sm" 
+                                            class="btn btn-success btn-sm criar" 
                                             data-toggle="tooltip" 
                                             data-placement="bottom" 
                                             title="Mudar Status da fiscalização" 
@@ -280,7 +280,7 @@
       
 
         $(function(){
-            $("body").on("click", ".btn-success", function(e){
+            $("body").on("click", ".criar", function(e){
             // Evitar que a página recarregue
             e.preventDefault();
             // Obter Processo do usuario
