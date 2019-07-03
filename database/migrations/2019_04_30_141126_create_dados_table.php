@@ -20,6 +20,7 @@ class CreateDadosTable extends Migration
             $table->string('nome_contribuinte');
             $table->string('endereco_visita');
             $table->boolean('arquivado')       ->default(false);
+            $table->boolean('deletado')       ->default(false);
             $table->char('data');
             $table->enum('hora',['Manhã - 09:00 as 12:00 Horas','Tarde - 12:00 as 17:00 Horas']);
             $table->enum('status',['Não Validado','Validado']);

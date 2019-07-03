@@ -13,6 +13,9 @@
                <li class="nav-item">
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Agendamentos Arquivados</a>
                </li>
+               <li class="nav-item">
+                  <a class="nav-link" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="delete" aria-selected="false">Deletados</a>
+               </li>
             </ul>
             
             <div class="tab-content" id="myTabContent">
@@ -60,18 +63,33 @@
                                         <td>{{ mb_strimwidth($dado->hora, 0, 8,"...")}}</td>
                                         <td>{{$dado->status}}</td>
                                         <td>{{$dado->statusinterno}}</td>
-                                        <td><a href="#"
+                                        <td>
+
+                                          <a href="#"
                                             data-id="{{$dado->id}}" 
                                             data-processo="{{$dado->processo}}"
                                             id="btn_andamento_viagem" 
-                                            class="btn btn-danger glyphicon glyphicon-search" 
+                                            class="btn btn-success btn-sm" 
                                             data-toggle="tooltip" 
-                                            data-viagem="15" 
+                                            data-placement="bottom" 
+                                            title="Mudar Status da fiscalização" 
+                                            data-desabilitado="false"
+                                             style="margin: 0.3125rem 1px;"
+                                            > 
+                                            <i class="fas fa-thumbs-up"></i>
+                                            </a>
+
+                                            <a href="#"
+                                            data-id="{{$dado->id}}" 
+                                            data-processo="{{$dado->processo}}"
+                                            id="btn_andamento_viagem" 
+                                            class="btn btn-danger btn-sm" 
+                                            data-toggle="tooltip" 
                                             data-placement="bottom" 
                                             title="Mudar Status da fiscalização" 
                                             data-desabilitado="false" 
                                             > 
-                                            <i class="fas fa-thumbs-up"></i>
+                                            <i class="far fa-trash-alt"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -138,6 +156,57 @@
 
                </div>
 
+               <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab">
+                <div class="">
+                    <h3 style="margin-left: 1%; margin-top: 2%;"> Lista de Agendamentos Deletados {{-- <small>Some examples to get you started</small> --}}</h3>
+                </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                 <br>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                    <div class="x_content">
+                        <table id="datatable3" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>CPF</th>
+                                    <th>Processo</th>
+                                    <th>Nome Contribuinte</th>
+                                    <th>Endereço Visita</th>
+                                    <th>Data Visita</th>
+                                    <th>Hora Visita</th>
+                                    <th>Status Contribuinte</th>
+                                    <th>Status da Fiscalização</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dadosdeletados as $dado)
+                                    <tr>
+                                        <td>{{$dado->cpf}}</td>
+                                        <td>{{$dado->processo}}</td>
+                                        <td>{{$dado->nome_contribuinte}}</td>
+                                        <td>{{$dado->endereco_visita}}</td>
+                                        <td>{{$dado->data}}</td>
+                                        <td>{{ mb_strimwidth($dado->hora, 0, 8,"...")}}</td>
+                                        <td>{{$dado->status}}</td>
+                                        <td>{{$dado->statusinterno}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+               </div>
+
 
             </div>
          </div>
@@ -174,8 +243,44 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
     <script>
+       $(function(){
+        $("body").on("click", ".btn-danger", function(e){
+          //Evitar que a pagina recarregue
+          e.preventDefault();
+          // Obter Processo do usuario
+          let processo = $(this).data('processo');
+          let id = $(this).data('id');
+
+          //config do swal
+            Swal.fire({
+              title: 'Você tem certeza?',
+              text: "Você não podera reverter essa ação!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Sim, Exclua isso!'
+            }).then((result) => {
+                if (result.value) {
+                  $.post('deletarel',{
+                    _token:   '{{ csrf_token() }}',
+                    id:     id,
+                  })
+                    Swal.fire({
+                    title: 'Deletado!',
+                    text: 'O Agendamento agora esta na guia Deletados.',
+                    type: 'success'}).then(function(){
+                      location.reload();
+                    }
+                  );
+                }
+              })
+            });
+          });
+      
+
         $(function(){
-            $("body").on("click", ".btn-danger", function(e){
+            $("body").on("click", ".btn-success", function(e){
             // Evitar que a página recarregue
             e.preventDefault();
             // Obter Processo do usuario
@@ -204,7 +309,7 @@
                     console.log(data);
                     $.post(" {{ url("/statusatt/") }}/"+data['value'],{
                     _token: 	'{{ csrf_token() }}',
-   	 	 		    id: 		id,
+   	 	 		          id: 		id,
    	 	 		    statusinterno: data
    	 	 	        }).done(function(){
 
@@ -243,6 +348,22 @@
       $(function($){
 
         $('#datatable2').DataTable({
+          columnDefs: [
+            {
+                type: 'date-uk',
+                targets: 4
+            }
+          ],
+          "language": {
+              "url": "js/portugues.json"
+          }
+        });
+
+      });
+
+      $(function($){
+
+        $('#datatable3').DataTable({
           columnDefs: [
             {
                 type: 'date-uk',

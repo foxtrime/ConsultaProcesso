@@ -162,3 +162,6 @@
   width: 100%;
 }
 }
+
+th { font-size: 12px; }
+td { font-size: 11px; }

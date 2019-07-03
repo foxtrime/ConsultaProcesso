@@ -17,5 +17,6 @@ class Dados extends Model
         'status',
         'statusinterno',
         'arquivado',
+        'deletado'
     ];
 }

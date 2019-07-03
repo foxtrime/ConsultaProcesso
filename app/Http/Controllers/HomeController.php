@@ -24,11 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dados = Dados::where('arquivado','=',0)->get();
+        $dados = Dados::where('arquivado','=',0)->where('deletado','=',0)->get();
 
-        $dadosarq = Dados::where('arquivado','=',1)->get();
+        $dadosarq = Dados::where('arquivado','=',1)->where('deletado','=',0)->get();
 
-        return view('home',compact('dados','dadosarq'));
+        $dadosdeletados = Dados::where('arquivado','=',0)->where('deletado','=',1)->get();
+
+        return view('home',compact('dados','dadosarq','dadosdeletados'));
     }
 
     public function create()
@@ -50,6 +52,13 @@ class HomeController extends Controller
         $dados->arquivado = 1;
         $dados->save();
         dd($dados);
+    }
+
+    public function deletaagendamento(Request $request)
+    {
+        $deleta = Dados::find($request->id);
+        $deleta->deletado = 1;
+        $deleta->save();
     }
 
 }

@@ -33,6 +33,7 @@ Route::get('validaprocesso/{numeroProcesso}', 'DadosController@confirmarProcesso
 
 
 Route::post('/statusatt/{data}', 'HomeController@editstatus');
+Route::post('/deletarel', 			'HomeController@deletaagendamento');
 
 Route::resource('/home', 'HomeController');
 
