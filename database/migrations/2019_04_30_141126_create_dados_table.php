@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,6 +22,7 @@ class CreateDadosTable extends Migration
             $table->boolean('arquivado')       ->default(false);
             $table->boolean('deletado')       ->default(false);
             $table->char('data');
+            $table->enum('presencial',['Sim','Não'])->nullable();
             $table->enum('hora',['Manhã - 09:00 as 12:00 Horas','Tarde - 12:00 as 17:00 Horas']);
             $table->enum('status',['Não Validado','Validado']);
             $table->enum('statusinterno',['Não Autorizado e Possivel Estimar',
@@ -30,6 +31,7 @@ class CreateDadosTable extends Migration
                                           'Não Atendido',
                                           'Não Atendido e Possivel Estimar',
                                           'Não Atendido e Impossivel Estimar',
+                                          'Não Compareceu à Presencial',
                                           'Área de Risco',
                                           'Lote Vazio',
                                           'Realizada'

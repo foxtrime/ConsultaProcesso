@@ -16,6 +16,7 @@ class Dados extends Model
         'hora',
         'status',
         'statusinterno',
+        'presencial',
         'arquivado',
         'deletado'
     ];

@@ -24,13 +24,42 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $dados = Dados::where('arquivado','=',0)->where('deletado','=',0)->get();
+     $dados = Dados::where('arquivado','=',0)->where('deletado','=',0)->get();
 
-        $dadosarq = Dados::where('arquivado','=',1)->where('deletado','=',0)->get();
+     $dadosarq = Dados::where('arquivado','=',1)->where('deletado','=',0)->get();
 
-        $dadosdeletados = Dados::where('arquivado','=',0)->where('deletado','=',1)->get();
+     $dadosdeletados = Dados::where('arquivado','=',0)->where('deletado','=',1)->get();
 
-        return view('home',compact('dados','dadosarq','dadosdeletados'));
+     //-------------------------- REALIZADA
+     $a = Dados::where('statusinterno', '=' , 'Realizada')->count();
+
+     $b = Dados::where('statusinterno', '=' , 'Não Autorizado e Possivel Estimar')->count();
+
+     $c = Dados::where('statusinterno', '=' , 'Não Atendido e Possivel Estimar')->count();
+
+     //----------------------------------------
+     
+     $realizada = $a + $b + $c;
+     
+     //-----------------------------Não Atendida
+     $d = Dados::where('statusinterno', '=' , 'Não Atendido e Impossivel Estimar')->count();
+
+     $e = Dados::where('statusinterno', '=' , 'Não Compareceu à Presencial')->count();
+
+     $f = Dados::where('statusinterno', '=' , 'Não Atendido')->count();
+     //--------------------------------------------
+     
+     $naoatendida = $d + $e + $f;
+     
+     //----------------------------------Não Autorizada
+     $g = Dados::where('statusinterno', '=' , 'Não Autorizado e Impossivel Estimar')->count();
+
+     //-----------------------------------Não localizada
+     $h = Dados::where('statusinterno', '=' , 'Não Localizado')->count();
+
+            
+
+      return view('home',compact('dados','dadosarq','dadosdeletados','realizada','naoatendida','g','h'));
     }
 
     public function create()

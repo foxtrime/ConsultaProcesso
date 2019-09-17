@@ -50,6 +50,14 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="presencial">Presencial</label>
+                            <select name="presencial" class="form-control" name="select">
+                                <option value="Sim">Sim</option> 
+                                <option value="Não">Não</option>
+                            </select>
+                        </div>
+
                         <div class="row col-md-12 col-sm-12">
                                 <div>
                                     <button type="submit" id="enviar-relatorio" class="botoes-acao btn btn-round btn-success enviar-relatorio">

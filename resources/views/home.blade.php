@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="container">
-   <div class="justify-content-center">
-      <div class="col-md-12">
-         <div class="card">
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="card">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Lista de Agendamentos</a>
@@ -43,6 +43,7 @@
                                 <tr>
                                     <th>CPF</th>
                                     <th>Processo</th>
+                                    <th>Presencial</th>
                                     <th>Nome Contribuinte</th>
                                     <th>Endereço Visita</th>
                                     <th>Data Visita</th>
@@ -57,6 +58,7 @@
                                     <tr>
                                         <td>{{$dado->cpf}}</td>
                                         <td>{{$dado->processo}}</td>
+                                        <td>{{$dado->presencial}}</td>
                                         <td>{{$dado->nome_contribuinte}}</td>
                                         <td>{{$dado->endereco_visita}}</td>
                                         <td>{{$dado->data}}</td>
@@ -126,6 +128,7 @@
                                 <tr>
                                     <th>CPF</th>
                                     <th>Processo</th>
+                                    <th>Presencial</th>
                                     <th>Nome Contribuinte</th>
                                     <th>Endereço Visita</th>
                                     <th>Data Visita</th>
@@ -139,6 +142,7 @@
                                     <tr>
                                         <td>{{$dado->cpf}}</td>
                                         <td>{{$dado->processo}}</td>
+                                        <td>{{$dado->presencial}}</td>
                                         <td>{{$dado->nome_contribuinte}}</td>
                                         <td>{{$dado->endereco_visita}}</td>
                                         <td>{{$dado->data}}</td>
@@ -179,6 +183,7 @@
                                 <tr>
                                     <th>CPF</th>
                                     <th>Processo</th>
+                                    <th>Presencial</th>
                                     <th>Nome Contribuinte</th>
                                     <th>Endereço Visita</th>
                                     <th>Data Visita</th>
@@ -192,6 +197,7 @@
                                     <tr>
                                         <td>{{$dado->cpf}}</td>
                                         <td>{{$dado->processo}}</td>
+                                        <td>{{$dado->presencial}}</td>
                                         <td>{{$dado->nome_contribuinte}}</td>
                                         <td>{{$dado->endereco_visita}}</td>
                                         <td>{{$dado->data}}</td>
@@ -210,8 +216,20 @@
 
             </div>
          </div>
+
+    </div>
+    <div class="col-sm-2">
+      <div class="card bg-light mb-3">
+        <div class="card-body">
+          <p class="card-text">Realizada: {{$realizada}}</p>
+          <p class="card-text">Não Atendida: {{$naoatendida}}</p>
+          <p class="card-text">Não Localizada: {{$h}}</p>
+          <p class="card-text">Não Autorizada: {{$g}}</p>
+
+        </div>
       </div>
-   </div>
+    </div>
+  </div>
 </div>
 
 @include('layouts.footer')
@@ -299,6 +317,7 @@
                         'Não Atendido': 'Não Atendido',
                         'Não Atendido e Possivel Estimar': 'Não Atendido e Possivel Estimar',
                         'Não Atendido e Impossivel Estimar': 'Não Atendido e Impossivel Estimar',
+                        'Não Compareceu à Presencial' : 'Não Compareceu à Presencial',
                         'Área de Risco': 'Área de Risco',
                         'Lote Vazio': 'Lote Vazio',
                         'Realizada': 'Realizada'
