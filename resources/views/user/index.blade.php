@@ -50,7 +50,7 @@
 
             let numeroProcesso = document.getElementById("processo").value;
             
-            var query = "http://consultaprocesso.test/pesquisaprocesso/" +numeroProcesso;
+            var query = "{{url("/")}}/pesquisaprocesso/" +numeroProcesso;
             //console.log(query);
 
             $.ajax({
