@@ -80,7 +80,7 @@
     <div id="app">
          <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container-fluid">
-               <img src="/img/logo.png" height="55"/>
+               <img src="{{ asset('img/logo.png')}}" height="55"/>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <!-- Right Side Of Navbar -->
                   <ul class="navbar-nav ml-auto">

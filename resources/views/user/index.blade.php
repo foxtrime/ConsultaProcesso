@@ -110,7 +110,7 @@
     function enviar(){
         let numeroProcesso = document.getElementById("processo").value;
 
-        var query = "http://consultaprocesso.test/validaprocesso/"+numeroProcesso;
+        var query = "{{url("/")}}/validaprocesso/"+numeroProcesso;
     
          $.ajax({
              url: query,
